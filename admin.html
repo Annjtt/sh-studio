@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH Studio - Админ-панель</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/glass-effects.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Фон с геометрическими фигурами для всего сайта -->
+    <div class="bg-shapes" id="site-bg"></div>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <h2>SH Studio Task</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#view-applications" class="active"><i class="fas fa-clipboard-list"></i> Просмотр заявок</a></li>
+                    <li><a href="#search-by-id"><i class="fas fa-search"></i> Поиск по ID</a></li>
+                    <li><a href="#filter-by-status"><i class="fas fa-filter"></i> Фильтр по статусу</a></li>
+                    <li><a href="#change-status"><i class="fas fa-edit"></i> Изменить статус заявки</a></li>
+                    <li><a href="#add-comment"><i class="fas fa-comment-alt"></i> Оставить комментарий</a></li>
+                    <li><a href="#back"><i class="fas fa-arrow-left"></i> Назад</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main-content">
+            <header class="admin-header">
+                <div class="header-left">
+                    <a href="index.html#home">
+                        <svg width="150" height="40" viewBox="0 0 150 40">
+                            <text x="30" y="30" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="24">SH Studio</text>
+                        </svg>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <img src="asset/img/user-avatar.png" alt="User Avatar">
+                        <span>Admin</span>
+                        <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <section id="admin-content">
+                <!-- Content for different sections will be loaded here by admin.js -->
+                <div id="view-applications-section" class="content-section active">
+                    <h2>Просмотр заявок</h2>
+                    <p>Здесь будет список заявок из Google Sheets.</p>
+                    <!-- Table for applications -->
+                    <div class="card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Имя</th>
+                                    <th>Email</th>
+                                    <th>Статус</th>
+                                    <th>Дата</th>
+                                    <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Application rows will be inserted here by JS -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Тестовая Заявка 1</td>
+                                    <td>test@example.com</td>
+                                    <td><span class="status pending">Новая</span></td>
+                                    <td>2023-10-26</td>
+                                    <td><a href="#" class="details-btn">Подробнее</a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Тестовая Заявка 2</td>
+                                    <td>test@example.com</td>
+                                    <td><span class="status pending">Новая</span></td>
+                                    <td>2023-10-26</td>
+                                    <td><a href="#" class="details-btn">Подробнее</a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Тестовая Заявка 3</td>
+                                    <td>test@example.com</td>
+                                    <td><span class="status pending">Новая</span></td>
+                                    <td>2023-10-26</td>
+                                    <td><a href="#" class="details-btn">Подробнее</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+
+                <div id="search-by-id-section" class="content-section">
+                    <h2>Поиск по ID</h2>
+                    <p>Здесь будет форма для поиска заявки по ID.</p>
+                    <div class="card">
+                        <input type="text" placeholder="Введите ID заявки">
+                        <button>Найти</button>
+                    </div>
+                    <div id="search-results" class="card" style="display: none;">
+                        <h3>Результаты поиска</h3>
+                        <p>Детальная информация по заявке будет здесь.</p>
+                    </div>
+                </div>
+
+                <div id="filter-by-status-section" class="content-section">
+                    <h2>Фильтр по статусу</h2>
+                    <p>Здесь будет выбор статуса для фильтрации заявок.</p>
+                    <div class="card">
+                        <select>
+                            <option value="all">Все</option>
+                            <option value="new">Новая</option>
+                            <option value="in-progress">В работе</option>
+                            <option value="completed">Завершена</option>
+                            <option value="declined">Отклонена</option>
+                        </select>
+                        <button>Применить фильтр</button>
+                    </div>
+                    <div id="filtered-results" class="card" style="display: none;">
+                        <h3>Отфильтрованные заявки</h3>
+                        <p>Список отфильтрованных заявок будет здесь.</p>
+                    </div>
+                </div>
+
+                <div id="change-status-section" class="content-section">
+                    <h2>Изменить статус заявки</h2>
+                    <p>Здесь будет форма для изменения статуса заявки.</p>
+                    <div class="card">
+                        <input type="text" placeholder="ID заявки">
+                        <select>
+                            <option value="new">Новая</option>
+                            <option value="in-progress">В работе</option>
+                            <option value="completed">Завершена</option>
+                            <option value="declined">Отклонена</option>
+                        </select>
+                        <button>Изменить статус</button>
+                    </div>
+                </div>
+
+                <div id="add-comment-section" class="content-section">
+                    <h2>Оставить комментарий</h2>
+                    <p>Здесь будет форма для добавления комментария к заявке.</p>
+                    <div class="card">
+                        <input type="text" placeholder="ID заявки">
+                        <textarea placeholder="Текст комментария"></textarea>
+                        <button>Добавить комментарий</button>
+                    </div>
+                </div>
+
+                <div id="back-section" class="content-section">
+                    <h2>Навигация</h2>
+                    <p>Используйте боковое меню для навигации.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,1019 @@
+/* Основные стили и настройки */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('glass-effects.css');
+
+:root {
+    --dark-bg: #0a0a0a;
+    --text-color: #ffffff;
+    --accent-color: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    --glass-blur: 10px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h5 {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+    margin-bottom: 0.125rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+ul {
+    list-style: none;
+}
+
+section {
+    padding: 100px 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* SVG иконки с тенями */
+.service-card svg,
+.social-link svg,
+.footer-social svg,
+.logo svg {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+    position: relative;
+    z-index: 2;
+}
+
+/* Стили для портфолио */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.portfolio-card {
+    overflow: hidden;
+    transition: var(--transition);
+    user-select: none;
+    cursor: pointer;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    user-select: none;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+}
+
+.portfolio-content {
+    padding: 20px;
+    user-select: none;
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tag {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Общие стили для кнопок */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+
+
+/* Шапка сайта */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px 0;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    position: relative;
+    padding: 5px 0;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: var(--transition);
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+    opacity: 0.7;
+}
+
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-toggle svg rect {
+    transition: var(--transition);
+}
+
+.menu-toggle:hover svg rect {
+    fill: #aaaaaa;
+}
+
+/* Главный баннер */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    background-color: var(--dark-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Общий фон с геометрическими фигурами */
+.bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.hero-content {
+    padding: 40px;
+    max-width: 600px;
+    text-align: center;
+    margin: 0 auto;
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Стили для геометрических фигур */
+.geometric-shape {
+    position: absolute;
+    border: 1.2px solid rgba(255, 255, 255, 0.5);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Стили для SVG треугольников */
+.svg-triangle {
+    pointer-events: none;
+    opacity: 0.9;
+    z-index: 10;
+    box-shadow: none !important;
+    background: none !important;
+    border: none !important;
+}
+
+.svg-triangle polygon {
+    fill: transparent !important;
+}
+
+/* Адаптивность для геометрических фигур */
+@media (max-width: 768px) {
+    .geometric-shape {
+        border-width: 1px;
+    }
+    
+    .svg-triangle polygon {
+        stroke-width: 1px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .geometric-shape {
+        /* Уменьшаем количество и размер фигур на маленьких экранах */
+        transform-origin: center;
+        transform: scale(0.7);
+    }
+}
+
+/* О нас */
+.about {
+    position: relative;
+    z-index: 1;
+}
+
+.about-content {
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link span {
+    margin-left: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Услуги */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    perspective: 1500px;
+}
+
+
+
+.service-card svg {
+    margin-bottom: 20px;
+    transform: translateZ(10px);
+}
+
+.service-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    position: relative;
+    z-index: 2;
+    transform: translateZ(10px);
+}
+
+.service-card p {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(10px);
+}
+
+.service-card:hover {
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Эффект блика при наведении для 3D */
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: inherit;
+}
+
+.service-card:hover::after {
+    opacity: 1;
+}
+
+/* Эффект при наведении на карточки услуг (3D наклон) */
+.card-hover-effect {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 8px 12px 20px rgba(0, 0, 0, 0.25), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+
+
+/* Элементы внутри карточки тоже учитывают 3D-пространство */
+.service-card svg,
+.service-card h3,
+.service-card p {
+    transform: translateZ(10px);
+}
+
+/* Форма контактов */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    opacity: 1 !important;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    position: relative;
+    z-index: 2;
+}
+
+/* Стили для поля загрузки файлов */
+.form-group .optional {
+    font-size: 0.85em;
+    opacity: 0.7;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+/* Кастомный стиль для поля загрузки файлов */
+.file-upload {
+    position: relative;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.file-input {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    transition: var(--transition);
+    width: 100%;
+    cursor: pointer;
+}
+
+.file-label:hover {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.file-label .icon {
+    margin-right: 10px;
+    display: inline-flex;
+}
+
+.file-label svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+}
+
+.file-info {
+    font-size: 0.8em;
+    margin-top: 5px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+}
+
+.file-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80%;
+}
+
+.file-clear {
+    cursor: pointer;
+    font-size: 0.9em;
+    opacity: 0.7;
+    transition: var(--transition);
+    margin-left: 10px;
+}
+
+.file-clear:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* Фиксим форму */
+.form-group input,
+.form-group textarea {
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    transition: var(--transition);
+    width: 100%;
+    padding: 12px 15px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.contact-form .btn {
+    width: 100%;
+    margin-top: 10px;
+    background: #0f0f0f;
+}
+
+.contact-form .btn:hover {
+    background: #1a1a1a;
+}
+
+/* Подвал */
+footer {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px 0 30px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.footer-social svg {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+}
+
+.footer-social a:hover {
+    transform: translateY(-5px);
+    opacity: 0.8;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Анимации появления */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Задержка анимации для последовательного появления */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* Анимация появления для карточек услуг */
+.service-card-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card-animate.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Медиа-запросы */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.95);
+        padding: 20px;
+        clip-path: circle(0px at top right);
+        transition: var(--transition);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    nav.active {
+        clip-path: circle(1500px at top right);
+    }
+    
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 8px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    section {
+        padding: 70px 0;
+    }
+    
+    .hero-content {
+        padding: 30px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .service-card {
+        padding: 20px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .service-card {
+        padding: 15px;
+    }
+    
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .hero {
+        padding-top: 60px;
+    }
+    
+    .social-link {
+        padding: 8px 15px;
+        margin-bottom: 10px;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .about-content {
+        padding: 20px;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Создаем темный фон для контента во всех секциях */
+.services, .contact, .about {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* Исправление для текста внутри элементов */
+.service-card svg,
+.service-card h3,
+.service-card p,
+.social-link svg,
+.social-link span,
+.btn {
+    position: relative;
+    z-index: 2;
+}
+
+/* Улучшенное расположение для больших экранов */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 30px;
+    }
+    
+    section {
+        padding: 100px 0;
+    }
+    
+    .hero-content {
+        max-width: 600px;
+    }
+}
+
+
+/* Медиа-запросы */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.95);
+        padding: 20px;
+        clip-path: circle(0px at top right);
+        transition: var(--transition);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    nav.active {
+        clip-path: circle(1500px at top right);
+    }
+    
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 8px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    section {
+        padding: 70px 0;
+    }
+    
+    .hero-content {
+        padding: 30px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .service-card {
+        padding: 20px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .service-card {
+        padding: 15px;
+    }
+    
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .hero {
+        padding-top: 60px;
+    }
+    
+    .social-link {
+        padding: 8px 15px;
+        margin-bottom: 10px;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .about-content {
+        padding: 20px;
+    }
+    
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Создаем темный фон для контента во всех секциях */
+.services, .contact, .about {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.service-card svg,
+.service-card h3,
+.service-card p,
+.social-link svg,
+.social-link span,
+.btn {
+    position: relative;
+    z-index: 2;
+}
+
+/* Улучшенное расположение для больших экранов */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1320px;
+        margin: 0 auto;
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 30px;
+    }
+    
+    section {
+        padding: 100px 0;
+    }
+    
+    .hero-content {
+        max-width: 600px;
+    }
+}

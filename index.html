@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH Studio - Студия разработки и дизайна</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/glass-effects.css">
+</head>
+<body>
+    <!-- Фон с геометрическими фигурами для всего сайта -->
+    <div class="bg-shapes" id="site-bg"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <svg width="150" height="40" viewBox="0 0 150 40">
+                        <text x="10" y="30" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="24">SH Studio</text>
+                    </svg>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="portfolio.html">Портфолио</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <svg width="30" height="30" viewBox="0 0 100 100">
+                    <rect y="20" width="100" height="10" rx="5" fill="white"></rect>
+                    <rect y="50" width="100" height="10" rx="5" fill="white"></rect>
+                    <rect y="80" width="100" height="10" rx="5" fill="white"></rect>
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-bg" id="geometric-bg"></div>
+        <div class="container">
+            <div class="hero-content glass-effect fade-up">
+                <h1>SH Studio</h1>
+                <p>Мы создаём уникальные решения для вашего бизнеса</p>
+                <a href="#contact" class="btn">Связаться с нами</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="fade-up">О нас</h2>
+            <div class="about-content glass-effect fade-up delay-1">
+                <p>SH Studio — команда профессионалов, объединенных общей целью создавать инновационные решения в области дизайна и разработки. Мы сочетаем креативность и технические знания, чтобы воплощать уникальные идеи в реальность.</p>
+                <div class="social-links">
+                    <a href="https://t.me/sh_studio_official" target="_blank" class="social-link glass-effect">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                        <span>Основная группа</span>
+                    </a>
+                    <a href="https://t.me/santhouse_life" target="_blank" class="social-link glass-effect">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                        <span>Основной канал</span>
+                    </a>
+                    <a href="https://t.me/sh_des_lab" target="_blank" class="social-link glass-effect">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                        <span>Design Lab</span>
+                    </a>
+                </div>
+                <div class="button-container" style="margin-top: 2rem; text-align: center;">
+                    <a href="portfolio.html" class="btn" style="display: inline-block; padding: 1rem 2rem;">Портфолио</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="fade-up">Услуги</h2>
+            <div class="services-grid">
+                <div class="service-card glass-effect fade-up delay-1">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M45 5H15C12.2386 5 10 7.23858 10 10V50C10 52.7614 12.2386 55 15 55H45C47.7614 55 50 52.7614 50 50V10C50 7.23858 47.7614 5 45 5Z" stroke="white" stroke-width="2"/>
+                        <path d="M20 15H40" stroke="white" stroke-width="2"/>
+                        <path d="M20 25H40" stroke="white" stroke-width="2"/>
+                        <path d="M20 35H30" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <h3>Разработка приложений</h3>
+                    <p>Создаем кроссплатформенные мобильные приложения любой сложности</p>
+                </div>
+                <div class="service-card glass-effect fade-up delay-2">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="30" cy="20" r="10" stroke="white" stroke-width="2"/>
+                        <path d="M45 50C45 41.7157 38.2843 35 30 35C21.7157 35 15 41.7157 15 50" stroke="white" stroke-width="2"/>
+                        <path d="M30 35V50" stroke="white" stroke-width="2"/>
+                        <path d="M15 42.5H45" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <h3>UI/UX дизайн</h3>
+                    <p>Разрабатываем уникальные интерфейсы с фокусом на пользователя</p>
+                </div>
+                <div class="service-card glass-effect fade-up delay-3">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="10" width="40" height="40" rx="5" stroke="white" stroke-width="2"/>
+                        <path d="M20 20H40" stroke="white" stroke-width="2"/>
+                        <path d="M20 30H40" stroke="white" stroke-width="2"/>
+                        <path d="M20 40H30" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <h3>Создание сайтов</h3>
+                    <p>Проектируем и разрабатываем современные веб-сайты и порталы</p>
+                </div>
+                <div class="service-card glass-effect fade-up delay-4">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 15L45 45" stroke="white" stroke-width="2"/>
+                        <path d="M15 45L45 15" stroke="white" stroke-width="2"/>
+                        <circle cx="30" cy="30" r="20" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <h3>Графический дизайн</h3>
+                    <p>Создаем фирменные стили, логотипы и маркетинговые материалы</p>
+                </div>
+                <div class="service-card glass-effect fade-up delay-5">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="10" y="15" width="40" height="30" rx="5" stroke="white" stroke-width="2"/>
+                        <path d="M25 25L35 30L25 35V25Z" stroke="white" stroke-width="2"/>
+                        <path d="M10 50L15 45M50 50L45 45" stroke="white" stroke-width="2"/>
+                        <path d="M10 10L15 15M50 10L45 15" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <h3>Видео монтаж</h3>
+                    <p>Создаем профессиональные видеоролики, анимацию и рекламные ролики</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="fade-up">Связаться с нами</h2>
+            <div class="contact-form glass-effect fade-up delay-1">
+                <form id="contact-form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project">Описание проекта</label>
+                        <textarea id="project" name="project_description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Прикрепить файл <span class="optional">(опционально)</span></label>
+                        <div class="file-upload">
+                            <input type="file" id="file-input" name="attachment" class="file-input" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                            <label for="file-input" class="file-label">
+                                <span class="icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 3v12m0 0l-4-4m4 4l4-4m-9 9h10"></path>
+                                    </svg>
+                                </span>
+                                <span>Выбрать файл</span>
+                            </label>
+                            <div class="file-info" style="display: none;">
+                                <span id="file-name">Файл не выбран</span>
+                                <span class="file-size-info">Максимальный размер: 5MB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <svg width="150" height="40" viewBox="0 0 150 40">
+                        <text x="10" y="30" fill="white" font-family="Arial, sans-serif" font-weight="bold" font-size="24">SH Studio</text>
+                    </svg>
+                </div>
+                <div class="footer-social">
+                    <a href="https://t.me/sh_studio_official" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/santhouse_life" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="https://t.me/sh_des_lab" target="_blank">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 15.996 10.824 15.324C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.34 9.972C14.268 9.912 14.172 9.936 14.088 9.948C13.98 9.972 12.3 11.088 9.024 13.296C8.544 13.62 8.112 13.788 7.728 13.776C7.296 13.764 6.48 13.536 5.868 13.332C5.112 13.092 4.524 12.96 4.572 12.54C4.596 12.324 4.896 12.108 5.46 11.88C8.964 10.332 11.292 9.312 12.456 8.808C15.792 7.32 16.476 7.08 16.932 7.08C17.028 7.08 17.256 7.104 17.4 7.224C17.52 7.332 17.556 7.476 17.568 7.572C17.556 7.644 17.58 7.932 17.568 8.16Z" fill="white"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SH Studio. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

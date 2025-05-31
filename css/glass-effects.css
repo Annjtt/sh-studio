@@ -1,0 +1,134 @@
+/* Стили для эффекта стекла */
+
+/* Базовые стили для элементов с эффектом стекла */
+.glass-effect {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Общие стили для элементов с эффектом при наведении */
+.glass-effect,
+.service-card,
+.social-link,
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Псевдоэлемент для создания градиентного эффекта */
+.glass-effect::before,
+.service-card::before,
+.social-link::before,
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: -1;
+    transition: background 0.3s ease;
+    border-radius: inherit;
+}
+
+/* Градиентный эффект при наведении */
+.glass-effect:hover::before,
+.service-card:hover::before,
+.social-link:hover::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.15) 100%);
+}
+
+/* Специальный градиент для кнопок */
+.btn:hover::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.2) 100%);
+}
+
+/* Блик в углу при наведении - делаем его более тонким и менее заметным */
+.glass-effect:hover::after,
+.service-card:hover::after,
+.social-link:hover::after,
+.btn:hover::after {
+    content: "";
+    position: absolute;
+    top: -70%;
+    right: -70%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: rotate(30deg);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* Стили для текста и содержимого внутри элементов */
+.service-card svg,
+.service-card h3,
+.service-card p,
+.social-link svg,
+.social-link span,
+.btn {
+    position: relative;
+    z-index: 2;
+}
+
+/* Специальные стили для карточек услуг */
+.service-card {
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.service-card:hover {
+    /* transform: translateY(-10px);  УБРАНО, теперь только через JS */
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Специальные стили для социальных ссылок */
+.social-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Стили для кнопок */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #000000;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+} 

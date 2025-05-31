@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('glass-effects.css');
+@import url('style.css');
+/* Admin-specific styles */
+
+:root {
+    --sidebar-width: 330px;
+    --header-height: 60px;
+    --text-color: #ffffff;
+    --primary-color: #ffffff; /* Using accent-color from style.css */
+    --secondary-text-color: rgba(255, 255, 255, 0.7);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    --backdrop-filter: blur(10px);
+    --border-radius: 10px;
+    --sidebar-background: rgba(10, 10, 10, 0.8); /* Darker, slightly transparent */
+    --card-background: rgba(255, 255, 255, 0.05); /* Lighter glass effect for cards */
+    --button-text-color: #0a0a0a; /* Dark text for buttons */
+    
+}
+
+body {
+    margin-top:  100px;
+    font-family: 'Montserrat', sans-serif; /* Using font from style.css */
+    background-color: #0a0a0a; /* Using dark-bg from style.css */
+    color: var(--text-color);
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.admin-container {
+    display: flex;
+    min-height: auto;
+    margin: 10px; /* Отступ от краев */
+    border: var(--glass-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    position: relative; /* Для позиционирования псевдоэлементов */
+    z-index: 1; /* Чтобы быть над частицами */
+}
+
+.admin-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для эффекта стекла */
+    backdrop-filter: blur(10px); /* Эффект размытия */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: var(--glass-border);
+    z-index: -1; /* Под контентом */
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-background);
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+    backdrop-filter: var(--backdrop-filter);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.sidebar-header h2 {
+    position: static;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    color: var(--primary-color);
+    font-size: 1.8em;
+}
+
+.sidebar-header p {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+}
+
+.sidebar-nav ul {
+    position: relative;
+    padding: 0px 20px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    margin-bottom: 20px;
+}
+
+.sidebar-nav a {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.sidebar-nav a:hover {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-nav a.active {
+    background-color: var(--primary-color); /* Using primary color for active state */
+    color: var(--button-text-color); /* Dark text for active button */
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(255, 0, 127, 0.3); /* Subtle shadow for active */
+}
+
+.sidebar-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.sidebar-footer a {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: color 0.3s ease;
+}
+
+.sidebar-footer a i {
+    margin-right: 10px;
+}
+
+.sidebar-footer a:hover {
+    color: var(--primary-color);
+}
+
+/* Main Content */
+.admin-main-content {
+    flex-grow: 1;
+    padding: 30px;
+    z-index: 2; /* Над псевдоэлементом */
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left h1 {
+    margin-left: 2em;
+    font-size: 1.8em;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-profile span {
+    margin-right: 5px;
+}
+
+/* Styles for content sections */
+.content-section {
+    display: none; /* Hide all sections by default */
+    padding: 20px;
+}
+
+.content-section.active {
+    display: block; /* Show the active section */
+}
+
+.content-section h2 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.content-section p {
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+}
+
+/* Card styles for sections */
+.content-section .card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: var(--backdrop-filter);
+    border: var(--glass-border);
+    margin-bottom: 20px;
+}
+
+/* Table styles */
+.content-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.content-section th,
+.content-section td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.content-section th {
+    color: var(--secondary-text-color);
+    font-weight: bold;
+}
+
+.content-section tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.content-section .status {
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.content-section .status.pending {
+    background-color: var(--status-pending-bg);
+    color: var(--status-pending-text);
+}
+
+.content-section .status.declined {
+    background-color: var(--status-declined-bg);
+    color: var(--status-declined-text);
+}
+
+.content-section .status.active {
+    background-color: var(--status-active-bg);
+    color: var(--status-active-text);
+}
+
+.content-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.content-section input[type="text"],
+.content-section textarea,
+.content-section select {
+    width: calc(100% - 22px); /* Adjust for padding and border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 1em;
+}
+
+.content-section textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.content-section button {
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.content-section button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Background Shapes (from style.css, adapted for admin) */
+.bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Ensure it's behind everything */
+}
+
+.bg-shapes::before,
+.bg-shapes::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(50px);
+}
+
+.bg-shapes::before {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    top: -50px;
+    left: -50px;
+    animation: moveShape1 15s infinite alternate ease-in-out;
+}
+
+.bg-shapes::after {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    bottom: -100px;
+    right: -100px;
+    animation: moveShape2 20s infinite alternate ease-in-out;
+}
+
+@keyframes moveShape1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 100px) scale(1.1); }
+}
+
+@keyframes moveShape2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-100px, -100px) scale(1.2); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .admin-container {
+        flex-direction: column;
+        margin: 10px;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        padding: 15px;
+        border-right: none;
+        border-bottom: var(--border-color);
+        flex-direction: row; /* Horizontal layout for nav */
+        justify-content: space-around; /* Distribute items */
+        align-items: center;
+        height: auto; /* Allow height to adjust */
+    }
+
+    .sidebar-header {
+        display: none; /* Hide header on small screens */
+    }
+
+    .sidebar-nav ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar-nav li {
+        margin: 5px 10px; /* Adjust spacing */
+    }
+
+    .sidebar-footer {
+        display: none; /* Hide footer on small screens */
+    }
+
+    .admin-main-content {
+        padding: 15px;
+        overflow-y: auto; /* Allow vertical scrolling for main content */
+        max-height: calc(100vh - var(--header-height) - 20px - 100px); /* Adjust based on header and sidebar height on mobile */
+    }
+
+    .admin-container {
+        min-height: 100vh; /* Ensure container takes full viewport height */
+    }
+
+    .admin-header h1 {
+        font-size: 1.8em;
+    }
+
+    .admin-header .user-info {
+        font-size: 0.9em;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .user-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+    }
+}

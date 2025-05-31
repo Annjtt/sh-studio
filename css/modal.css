@@ -1,0 +1,137 @@
+/* Стили для модального окна портфолио */
+.portfolio-modal {
+    display: none;
+    position: fixed;
+    top: 120px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.portfolio-modal.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.portfolio-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: var(--dark-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.portfolio-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 2001;
+    transition: var(--transition);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+}
+
+.portfolio-modal-close:hover {
+    transform: rotate(90deg);
+}
+
+.portfolio-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.portfolio-modal-gallery {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.portfolio-modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    user-select: none;
+}
+
+.portfolio-modal-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.portfolio-modal-gallery img:hover {
+    transform: scale(1.02);
+}
+
+.portfolio-modal-info {
+    padding: 20px;
+    max-height: fit-content;
+}
+
+.portfolio-modal-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.portfolio-modal-description {
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
+.portfolio-modal-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.portfolio-modal-link {
+    padding: 12px 24px;
+    border-radius: 30px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transition: var(--transition);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--glass-shadow);
+}
+
+.portfolio-modal-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .portfolio-modal-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-modal-content {
+        margin: 20px auto;
+        padding: 20px;
+    }
+}
