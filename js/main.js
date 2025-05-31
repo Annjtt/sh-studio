@@ -603,7 +603,7 @@ function initGeometricBackground(containerId, numberOfShapes) {
 const API_CONFIG = {
     BASE_URL: 'http://localhost:8000',  // Базовый URL API бота
     ENDPOINTS: {
-        SUBMIT_FORM: '/submit-form',    // Эндпоинт отправки формы
+        SUBMIT_FORM: '/api/submit',    // Эндпоинт отправки формы
         CHECK_STATUS: '/order-status'   // Эндпоинт проверки статуса
     }
 };
@@ -660,7 +660,7 @@ form.addEventListener('submit', async (e) => {
         fileInfo.style.display = 'none';
         
         // Показываем сообщение об успехе с ID заказа
-        alert(`Заявка успешно отправлена! ID заказа: ${result.order_id}`);
+        alert('Заявка успешно отправлена!');
         
     } catch (error) {
         console.error('Ошибка:', error);
