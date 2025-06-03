@@ -592,6 +592,8 @@ nav ul li a:hover::after {
     font-family: 'Montserrat', sans-serif;
     transition: var(--transition);
     width: 100%;
+    max-width: 100%;
+    min-width: 100%;
     padding: 12px 15px;
 }
 
