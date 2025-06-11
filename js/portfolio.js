@@ -13,7 +13,7 @@ const portfolioProjects = [
                 <li>Результатах работы</li>
             </ul>
         `,
-        thumbnail: '', // Используем SVG заглушку
+        thumbnail: 'asset/img/portfolio/mobile/mobile.avif', // Используем SVG заглушку
         images: [
             'asset/img/portfolio/mobile/mobile1.jpg',
             'asset/img/portfolio/mobile/mobile2.jpg',
@@ -36,24 +36,29 @@ const portfolioProjects = [
         title: 'Веб-сайт',
         shortDescription: 'Дизайн и разработка корпоративного сайта с анимациями',
         fullDescription: `
-            <p>Корпоративный сайт с современным дизайном и интерактивными элементами:</p>
+            <h5>Сервис персонализированных подарков с современным дизайном и интерактивными элементами:</h5>
+            <h6>Ferret — как будто вы выбрали сами, но без хлопот</h6>
+            <p>Идея проста: вы рассказываете, для кого и зачем нужен подарок — а эксперты сервиса подбирают лучший вариант, упаковывают со вкусом и доставляют точно в срок.</p>
             <ul>
-                <li>Адаптивный дизайн</li>
-                <li>Анимации при скролле</li>
-                <li>Оптимизация производительности</li>
-                <li>SEO-оптимизация</li>
+                <li>⬦ Адаптивный дизайн</li>
+                <li>⬦ Анимации при скролле</li>
+                <li>⬦ Оптимизация производительности</li>
+                <li>⬦ Сайт создан с акцентом на эмоциональный отклик, простоту выбора и ясную воронку заказа</li>
             </ul>
         `,
-        thumbnail: '',
+        thumbnail: 'asset/img/portfolio/website/web.jpg',
         images: [
-            'asset/img/portfolio/website/website1.jpg',
-            'asset/img/portfolio/website/website3.jpg'
+            'asset/img/portfolio/website/website1.png',
+            'asset/img/portfolio/website/website2.png',
+            'asset/img/portfolio/website/website3.png',
+            'asset/img/portfolio/website/website4.png',
+            'asset/img/portfolio/website/website5.png'
         ],
         tags: ['HTML5', 'CSS3', 'JavaScript'],
         links: [
             {
                 title: 'Сайт',
-                url: 'https://example.com'
+                url: 'https://annjtt.github.io/Ferret'
             }
         ]
     },
@@ -70,7 +75,7 @@ const portfolioProjects = [
                 <li>Гайдлайны по использованию</li>
             </ul>
         `,
-        thumbnail: '',
+        thumbnail: 'asset/img/portfolio/brand/brand.avif',
         images: [
             'asset/img/portfolio/brand/brand1.jpg',
             'asset/img/portfolio/brand/brand2.jpg',
@@ -97,7 +102,7 @@ const portfolioProjects = [
                 <li>Панель аналитики и отчетности</li>
             </ul>
         `,
-        thumbnail: '',
+        thumbnail: 'asset/img/portfolio/telegram/tg.jpg',
         images: [
             'asset/img/portfolio/telegram/telegram1.jpg',
             'asset/img/portfolio/telegram/telegram2.jpg',
@@ -128,7 +133,7 @@ const portfolioProjects = [
                 <li>Поддержка многопользовательской игры</li>
             </ul>
         `,
-        thumbnail: '',
+        thumbnail: 'asset/img/portfolio/wallchess/game.avif',
         images: [
             'asset/img/portfolio/wallchess/wallchess1.jpg',
             'asset/img/portfolio/wallchess/wallchess2.jpg',

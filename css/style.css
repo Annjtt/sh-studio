@@ -113,7 +113,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .portfolio-card {
@@ -680,6 +680,8 @@ footer {
 }
 
 .fade-up.active {
+    margin-bottom: 10px;
+    margin-top: 20px;
     opacity: 1;
     transform: translateY(0);
 }
