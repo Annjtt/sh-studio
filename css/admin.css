@@ -10,18 +10,17 @@
     --primary-color: #ffffff; /* Using accent-color from style.css */
     --secondary-text-color: rgba(255, 255, 255, 0.7);
     --border-color: rgba(255, 255, 255, 0.1);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
+    --glass-border: 0px solid rgba(255, 255, 255, 0.2);
     --box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     --backdrop-filter: blur(10px);
     --border-radius: 10px;
     --sidebar-background: rgba(10, 10, 10, 0.8); /* Darker, slightly transparent */
-    --card-background: rgba(255, 255, 255, 0.05); /* Lighter glass effect for cards */
+    --card-background: rgba(255, 255, 255, 0.04); /* Lighter glass effect for cards */
     --button-text-color: #0a0a0a; /* Dark text for buttons */
     
 }
 
 body {
-    margin-top:  100px;
     font-family: 'Montserrat', sans-serif; /* Using font from style.css */
     background-color: #0a0a0a; /* Using dark-bg from style.css */
     color: var(--text-color);
@@ -31,7 +30,7 @@ body {
 .admin-container {
     display: flex;
     min-height: auto;
-    margin: 10px; /* Отступ от краев */
+    margin: 20px; /* Отступ от краев */
     border: var(--glass-border);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -74,7 +73,7 @@ body {
 
 .sidebar-header h2 {
     position: static;
-    margin-top: 1.5em;
+    margin-top: 2.5em;
     margin-bottom: 1.5em;
     color: var(--primary-color);
     font-size: 1.8em;
@@ -157,9 +156,15 @@ body {
 }
 
 .admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-left h1 {
@@ -206,6 +211,8 @@ body {
 
 /* Card styles for sections */
 .content-section .card {
+    position: relative;
+    width: auto;
     background: var(--card-background);
     border-radius: var(--border-radius);
     padding: 20px;
@@ -355,6 +362,8 @@ body {
     }
 
     .admin-sidebar {
+        display: flex;
+        position: absolute;
         width: 100%;
         padding: 15px;
         border-right: none;
