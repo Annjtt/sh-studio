@@ -152,15 +152,16 @@ const portfolioProjects = [
         title: 'Desktop app',
         shortDescription: 'Разработка приложений под Windows и macOS',
         fullDescription: `
-            <p>Инновационная шахматная игра со следующими особенностями:</p>
+            <h5>Re:frame - File Converter</h5>
+            <h6>Мощное приложение для конвертации и обработки изображений, разработанное с использованием Electron.</h6>
             <ul>
-                <li>Классические правила шахмат с дополнительными механиками</li>
-                <li>Механика размещения стен</li>
-                <li>Интерактивный игровой процесс</li>
-                <li>Поддержка многопользовательской игры</li>
+                <li> ⬦ Оно позволяет пользователям легко и быстро конвертировать изображения в различные форматы</li>
+                <li> ⬦ Удалять фон с изображений с помощью современных нейросетевых технологий</li>
+                <li> ⬦ Удобный интерфейс для загрузки, предпросмотра и скачивания файлов</li>
+                <li> ⬦ Поддержка пакетной обработки файлов</li>
             </ul>
         `,
-        thumbnail: 'asset/img/portfolio/wallchess/game.avif',
+        thumbnail: 'asset/img/portfolio/re-frame/laptop-pro.avif',
         images: [
             'asset/img/portfolio/re-frame/re-frame-start.webp',
             'asset/img/portfolio/re-frame/re-frame-main.webp',
