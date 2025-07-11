@@ -142,12 +142,36 @@ const portfolioProjects = [
         tags: ['JavaScript', 'HTML5 Canvas', 'Разработка игр'],
         links: [
             {
-                title: 'Играть',
-                url: 'https://example.com/wallchess'
-            },
+                title: 'GitHub',
+                url: 'https://github.com/Annjtt/wall-chess'
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: 'Desktop app',
+        shortDescription: 'Разработка приложений под Windows и macOS',
+        fullDescription: `
+            <p>Инновационная шахматная игра со следующими особенностями:</p>
+            <ul>
+                <li>Классические правила шахмат с дополнительными механиками</li>
+                <li>Механика размещения стен</li>
+                <li>Интерактивный игровой процесс</li>
+                <li>Поддержка многопользовательской игры</li>
+            </ul>
+        `,
+        thumbnail: 'asset/img/portfolio/wallchess/game.avif',
+        images: [
+            'asset/img/portfolio/re-frame/re-frame-start.webp',
+            'asset/img/portfolio/re-frame/re-frame-main.webp',
+            'asset/img/portfolio/re-frame/re-frame-set-format.webp',
+            'asset/img/portfolio/re-frame/re-frame-set.webp'
+        ],
+        tags: ['Electron.js', 'HTML5+CSS', 'Desktop app', 'Python'],
+        links: [
             {
                 title: 'GitHub',
-                url: 'https://github.com/example/wall-chess'
+                url: 'https://github.com/SH-Studio-official/re-frame'
             }
         ]
     }
@@ -209,6 +233,18 @@ function openProjectModal(project) {
 
     // Показываем модальное окно
     modal.classList.add('active');
+    document.body.classList.add('modal-open');
+
+    // Обработчик клика по изображениям для открытия лайтбокса
+    const gallery = modal.querySelector('.portfolio-modal-gallery');
+    if (gallery) {
+        gallery.querySelectorAll('img').forEach((img, idx) => {
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openImageLightbox(project.images, idx, project.title);
+            });
+        });
+    }
 
     // Обработчик закрытия
     const closeBtn = modal.querySelector('.portfolio-modal-close');
@@ -233,6 +269,85 @@ function openProjectModal(project) {
 function closeProjectModal() {
     const modal = document.getElementById('portfolio-modal');
     modal.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    closeImageLightbox(); // На всякий случай закрываем лайтбокс, если он открыт
+}
+
+// Лайтбокс для просмотра изображения
+function openImageLightbox(images, startIndex, alt) {
+    if (document.getElementById('image-lightbox')) return;
+    let currentIndex = startIndex;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'image-lightbox';
+    overlay.className = 'image-lightbox-overlay';
+
+    function renderLightbox() {
+        overlay.innerHTML = `
+            <button class="image-lightbox-nav image-lightbox-prev" ${currentIndex === 0 ? 'style=\"display:none\"' : ''}>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.5 8L11 14L16.5 20" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <div class="image-lightbox-content">
+                <span class="image-lightbox-close">&times;</span>
+                <img src="${images[currentIndex]}" alt="${alt || ''}" />
+            </div>
+            <button class="image-lightbox-nav image-lightbox-next" ${currentIndex === images.length - 1 ? 'style=\"display:none\"' : ''}>
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.5 8L17 14L11.5 20" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        `;
+        // Клик вне картинки — закрыть
+        overlay.querySelector('.image-lightbox-content').parentElement.addEventListener('click', function(e) {
+            if (e.target === overlay) closeImageLightbox();
+        });
+        // Клик по крестику
+        overlay.querySelector('.image-lightbox-close').addEventListener('click', closeImageLightbox);
+        // Клик по стрелкам
+        const prevBtn = overlay.querySelector('.image-lightbox-prev');
+        const nextBtn = overlay.querySelector('.image-lightbox-next');
+        if (prevBtn) prevBtn.addEventListener('click', function(e) { e.stopPropagation(); showPrev(); });
+        if (nextBtn) nextBtn.addEventListener('click', function(e) { e.stopPropagation(); showNext(); });
+    }
+
+    function showPrev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderLightbox();
+        }
+    }
+    function showNext() {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+            renderLightbox();
+        }
+    }
+
+    function lightboxEscHandler(e) {
+        if (e.key === 'Escape') closeImageLightbox();
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+    }
+
+    function closeImageLightbox() {
+        overlay.remove();
+        document.removeEventListener('keydown', lightboxEscHandler);
+    }
+
+    renderLightbox();
+    document.body.appendChild(overlay);
+    document.body.classList.add('modal-open');
+    document.addEventListener('keydown', lightboxEscHandler);
+}
+
+function closeImageLightbox() {
+    const overlay = document.getElementById('image-lightbox');
+    if (overlay) {
+        overlay.remove();
+        document.removeEventListener('keydown', lightboxEscHandler);
+    }
 }
 
 // Инициализация портфолио
