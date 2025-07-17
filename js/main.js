@@ -377,7 +377,7 @@ function createRandomShape(container, shapeTypes) {
     shape.classList.add(shapeType);
     
     // Размер от 60 до 120px
-    const size = Math.floor(Math.random() * 60) + 60;
+    const size = Math.floor(Math.random() * 60) + 90;
     
     // Для всех фигур используем одинаковый размер
     const adjustedSize = size;
@@ -392,8 +392,8 @@ function createRandomShape(container, shapeTypes) {
     
     // Случайная скорость движения (медленно)
     // Уменьшаем скорость для более плавного движения
-    const speedX = (Math.random() - 0.5) * 0.06; // Уменьшена скорость для более плавного движения
-    const speedY = (Math.random() - 0.5) * 0.06; // Уменьшена скорость для более плавного движения
+    const speedX = (Math.random() - 0.5) * 0.09; // Уменьшена скорость для более плавного движения
+    const speedY = (Math.random() - 0.5) * 0.09; // Уменьшена скорость для более плавного движения
     
     // Начальное направление вращения
     const rotation = Math.random() * 360;
@@ -404,7 +404,7 @@ function createRandomShape(container, shapeTypes) {
     const rotationSpeed = (Math.random() - 0.5) * 0.08;
     
     // Увеличиваем яркость и непрозрачность
-    const opacity = 0.5 + (Math.random() * 0.5); // 0.5-1.0 для всех фигур
+    const opacity = 0.5 + (Math.random() * 1); // 0.5-1.0 для всех фигур
     // Сохраняем базовую прозрачность для дальнейшей анимации
     shape.dataset.baseOpacity = opacity;
     
@@ -480,10 +480,10 @@ function createSvgTriangle(container) {
     triangle.setAttribute("points", "50,15 85,85 15,85");
     
     // Устанавливаем стили
-    const opacity = 0.5 + (Math.random() * 0.5); // от 0.5 до 1.0
+    const opacity = 0.5 + (Math.random() * 1); // от 0.5 до 1.0
     triangle.setAttribute("fill", "transparent");
     triangle.setAttribute("stroke", `rgba(255, 255, 255, ${opacity})`);
-    triangle.setAttribute("stroke-width", "1.2");
+    triangle.setAttribute("stroke-width", "1");
     triangle.setAttribute("vector-effect", "non-scaling-stroke"); // Обеспечит одинаковую толщину линии
     
     // Сохраняем базовую прозрачность для дальнейшей анимации
