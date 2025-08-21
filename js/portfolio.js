@@ -214,9 +214,6 @@ function openProjectModal(project) {
     modalContent.innerHTML = `
         <span class="portfolio-modal-close">&times;</span>
         <div class="portfolio-modal-body">
-            <div class="portfolio-modal-gallery">
-                ${project.images.map(img => `<img src="${img}" alt="${project.title}">`).join('')}
-            </div>
             <div class="portfolio-modal-info">
                 <h2 class="portfolio-modal-title">${project.title}</h2>
                 <div class="portfolio-modal-description">${project.fullDescription}</div>
@@ -228,6 +225,9 @@ function openProjectModal(project) {
                         `<a href="${link.url}" class="portfolio-modal-link" target="_blank">${link.title}</a>`
                     ).join('')}
                 </div>
+            </div>
+            <div class="portfolio-modal-gallery">
+                ${project.images.map(img => `<img src="${img}" alt="${project.title}">`).join('')}
             </div>
         </div>
     `;
