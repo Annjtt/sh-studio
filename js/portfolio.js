@@ -93,12 +93,13 @@ const portfolioProjects = [
     {
         id: 3,
         title: 'Фирменный стиль',
-        shortDescription: 'Разработка логотипа и фирменного стиля для компании ПОРЕШАЕМ',
+        shortDescription: 'Разработка логотипа и фирменного стиля для репетиторского центра ПОРЕШАЕМ',
         fullDescription: `
-            <h5>Создание уникального фирменного стиля включало:</h5>
+            <h5>Создание фирменного стиля для компании:</h5>
+            <h6>В разработке фирменного стиля мы объединили:</h6>
             <ul>
                 <li> ⬦ Разработку логотипа</li>
-                <li> ⬦ Создание фирменного стиля</li>
+                <li> ⬦ Создание информационных буклетов и баннеров</li>
                 <li> ⬦ Дизайн фирменных материалов</li>
                 <li> ⬦ Подбор цветов и шрифтов</li>
                 <li> ⬦ Подготовка материалов для печати</li>
@@ -107,7 +108,6 @@ const portfolioProjects = [
         thumbnail: 'asset/img/portfolio/brand/brand.avif',
         images: [
             'asset/img/portfolio/brand/poreshaem8.jpeg',
-            'asset/img/portfolio/brand/poreshaem.webp',
             'asset/img/portfolio/brand/poreshaem1.webp',
             'asset/img/portfolio/brand/poreshaem2.webp',
             'asset/img/portfolio/brand/poreshaem3.webp',
@@ -116,6 +116,7 @@ const portfolioProjects = [
             'asset/img/portfolio/brand/poreshaem7.webp',
             'asset/img/portfolio/brand/poreshaem9.jpeg',
             'asset/img/portfolio/brand/poreshaem10.jpeg',
+            'asset/img/portfolio/brand/poreshaem.webp',
             'asset/img/portfolio/brand/poreshaem11.png',
             'asset/img/portfolio/brand/poreshaem12.jpeg',
             'asset/img/portfolio/brand/poreshaem13.png'
@@ -123,8 +124,12 @@ const portfolioProjects = [
         tags: ['Брендинг', 'Дизайн'],
         links: [
             {
-                title: 'Презентация',
-                url: 'https://example.com/presentation'
+                title: 'Сайт',
+                url: 'https://порешаем.рус/'
+            },
+            {
+                title: 'Группа в Вконтакте',
+                url: 'https://vk.com/poreshaem_vl'
             }
         ]
     },
