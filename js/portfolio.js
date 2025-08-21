@@ -1,40 +1,137 @@
 // Данные проектов портфолио
 const portfolioProjects = [
     {
-        id: 1,
-        title: 'Мобильное приложение',
-        shortDescription: 'Разработка кроссплатформенного приложения для управления задачами',
+        id: 5,
+        title: 'Game',
+        shortDescription: 'Разработка игр с использованием таких технологий как HTML5, CSS3 и JavaScript',
         fullDescription: `
-            <p>Полное описание проекта мобильного приложения. Здесь может быть подробная информация о:</p>
+            <p>Инновационная шахматная игра со следующими особенностями:</p>
             <ul>
-                <li>Целях проекта</li>
-                <li>Использованных технологиях</li>
-                <li>Решенных задачах</li>
-                <li>Результатах работы</li>
+                <li>Классические правила шахмат с дополнительными механиками</li>
+                <li>Механика размещения стен</li>
+                <li>Интерактивный игровой процесс</li>
+                <li>Поддержка многопользовательской игры</li>
             </ul>
         `,
-        thumbnail: 'asset/img/portfolio/mobile/mobile.avif', // Используем SVG заглушку
+        thumbnail: 'asset/img/portfolio/wallchess/game.avif',
         images: [
-            'asset/img/portfolio/mobile/mobile1.jpg',
-            'asset/img/portfolio/mobile/mobile2.jpg',
-            'asset/img/portfolio/mobile/mobile3.jpg'
+            'asset/img/portfolio/wallchess/wallchess1.jpg',
+            'asset/img/portfolio/wallchess/wallchess2.jpg',
+            'asset/img/portfolio/wallchess/wallchess3.jpg'
         ],
-        tags: ['React Native', 'Firebase'],
+        tags: ['JavaScript', 'HTML5 Canvas', 'Разработка игр'],
         links: [
             {
-                title: 'Демо',
-                url: 'https://example.com/demo'
-            },
-            {
                 title: 'GitHub',
-                url: 'https://github.com/example/project'
+                url: 'https://github.com/Annjtt/wall-chess'
             }
         ]
     },
     {
         id: 2,
         title: 'Веб-сайт',
-        shortDescription: 'Дизайн и разработка корпоративного сайта с анимациями',
+        shortDescription: 'Дизайн и разработка сайта для гостевого дома Asteria',
+        fullDescription: `
+            <h5>Дизайн и разработка сайта для гостевого дома:</h5>
+            <h6>Asteria – это решение для тех, кто ищет удобный и современный способ найти уютное место для отдыха.</h6>
+            <p>Наша команда разработала сайт с акцентом на удобство, дизайн, атмосферу и комфорт. А также на важность возможности заказать все услуги одним кликом. А также простая и ясная воронка покупки.</p>
+            <ul>
+                <li>⬦ Адаптивный дизайн</li>
+                <li>⬦ Анимации при скролле</li>
+                <li>⬦ Оптимизация производительности</li>
+                <li>⬦ Сайт создан с акцентом на эмоциональный отклик, простоту выбора и ясную воронку заказа</li>
+            </ul>
+        `,
+        thumbnail: 'asset/img/portfolio/website/web.jpg',
+        images: [
+            'asset/img/portfolio/asteria/asteria1.webp',
+            'asset/img/portfolio/asteria/asteria2.webp',
+            'asset/img/portfolio/asteria/asteria3.webp',
+            'asset/img/portfolio/asteria/asteria4.webp',
+            'asset/img/portfolio/asteria/asteria5.webp',
+            'asset/img/portfolio/asteria/asteria6.webp',
+            'asset/img/portfolio/asteria/asteria7.webp',
+            'asset/img/portfolio/asteria/asteria8.webp'
+        ],
+        tags: ['HTML5', 'CSS3', 'JavaScript'],
+        links: [
+            {
+                title: 'Сайт',
+                url: 'https://asteriahome.ru/'
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: 'Desktop app',
+        shortDescription: 'Разработка приложений под Windows и macOS',
+        fullDescription: `
+            <h5>Re:frame - File Converter</h5>
+            <h6>Мощное приложение для конвертации и обработки изображений, разработанное с использованием Electron.</h6>
+            <ul>
+                <li> ⬦ Оно позволяет пользователям легко и быстро конвертировать изображения в различные форматы</li>
+                <li> ⬦ Удалять фон с изображений с помощью современных нейросетевых технологий</li>
+                <li> ⬦ Удобный интерфейс для загрузки, предпросмотра и скачивания файлов</li>
+                <li> ⬦ Поддержка пакетной обработки файлов</li>
+            </ul>
+        `,
+        thumbnail: 'asset/img/portfolio/re-frame/laptop-pro.avif',
+        images: [
+            'asset/img/portfolio/re-frame/re-frame-start.webp',
+            'asset/img/portfolio/re-frame/re-frame-main.webp',
+            'asset/img/portfolio/re-frame/re-frame-set-format.webp',
+            'asset/img/portfolio/re-frame/re-frame-set.webp'
+        ],
+        tags: ['Electron.js', 'HTML5+CSS', 'Desktop app', 'Python'],
+        links: [
+            {
+                title: 'GitHub',
+                url: 'https://github.com/SH-Studio-official/re-frame'
+            }
+        ]
+    },
+    {
+        id: 3,
+        title: 'Фирменный стиль',
+        shortDescription: 'Разработка логотипа и фирменного стиля для компании ПОРЕШАЕМ',
+        fullDescription: `
+            <h5>Создание уникального фирменного стиля включало:</h5>
+            <ul>
+                <li> ⬦ Разработку логотипа</li>
+                <li> ⬦ Создание фирменного стиля</li>
+                <li> ⬦ Дизайн фирменных материалов</li>
+                <li> ⬦ Подбор цветов и шрифтов</li>
+                <li> ⬦ Подготовка материалов для печати</li>
+            </ul>
+        `,
+        thumbnail: 'asset/img/portfolio/brand/brand.avif',
+        images: [
+            'asset/img/portfolio/brand/poreshaem8.jpeg',
+            'asset/img/portfolio/brand/poreshaem.webp',
+            'asset/img/portfolio/brand/poreshaem1.webp',
+            'asset/img/portfolio/brand/poreshaem2.webp',
+            'asset/img/portfolio/brand/poreshaem3.webp',
+            'asset/img/portfolio/brand/poreshaem4.webp',
+            'asset/img/portfolio/brand/poreshaem6.webp',
+            'asset/img/portfolio/brand/poreshaem7.webp',
+            'asset/img/portfolio/brand/poreshaem9.jpeg',
+            'asset/img/portfolio/brand/poreshaem10.jpeg',
+            'asset/img/portfolio/brand/poreshaem11.png',
+            'asset/img/portfolio/brand/poreshaem12.jpeg',
+            'asset/img/portfolio/brand/poreshaem13.png'
+        ],
+        tags: ['Брендинг', 'Дизайн'],
+        links: [
+            {
+                title: 'Презентация',
+                url: 'https://example.com/presentation'
+            }
+        ]
+    },
+    {
+        id: 2,
+        title: 'Веб-сайт',
+        shortDescription: 'Дизайн и разработка сайта для сервиса персонализированных подарков Ferret',
         fullDescription: `
             <h5>Сервис персонализированных подарков с современным дизайном и интерактивными элементами:</h5>
             <h6>Ferret — как будто вы выбрали сами, но без хлопот</h6>
@@ -59,33 +156,6 @@ const portfolioProjects = [
             {
                 title: 'Сайт',
                 url: 'https://annjtt.github.io/Ferret'
-            }
-        ]
-    },
-    {
-        id: 3,
-        title: 'Фирменный стиль',
-        shortDescription: 'Разработка логотипа и брендбука для компании',
-        fullDescription: `
-            <p>Создание уникального фирменного стиля включало:</p>
-            <ul>
-                <li>Разработку логотипа</li>
-                <li>Создание брендбука</li>
-                <li>Дизайн фирменных материалов</li>
-                <li>Гайдлайны по использованию</li>
-            </ul>
-        `,
-        thumbnail: 'asset/img/portfolio/brand/brand.avif',
-        images: [
-            'asset/img/portfolio/brand/brand1.jpg',
-            'asset/img/portfolio/brand/brand2.jpg',
-            'asset/img/portfolio/brand/brand3.jpg'
-        ],
-        tags: ['Брендинг', 'Дизайн'],
-        links: [
-            {
-                title: 'Презентация',
-                url: 'https://example.com/presentation'
             }
         ]
     },
@@ -121,58 +191,33 @@ const portfolioProjects = [
         ]
     },
     {
-        id: 5,
-        title: 'Game',
-        shortDescription: 'Разработка игр с использованием таких технологий как HTML5, CSS3 и JavaScript',
+        id: 1,
+        title: 'Мобильное приложение',
+        shortDescription: 'Разработка кроссплатформенного приложения для управления задачами',
         fullDescription: `
-            <p>Инновационная шахматная игра со следующими особенностями:</p>
+            <p>Полное описание проекта мобильного приложения. Здесь может быть подробная информация о:</p>
             <ul>
-                <li>Классические правила шахмат с дополнительными механиками</li>
-                <li>Механика размещения стен</li>
-                <li>Интерактивный игровой процесс</li>
-                <li>Поддержка многопользовательской игры</li>
+                <li>Целях проекта</li>
+                <li>Использованных технологиях</li>
+                <li>Решенных задачах</li>
+                <li>Результатах работы</li>
             </ul>
         `,
-        thumbnail: 'asset/img/portfolio/wallchess/game.avif',
+        thumbnail: 'asset/img/portfolio/mobile/mobile.avif', // Используем SVG заглушку
         images: [
-            'asset/img/portfolio/wallchess/wallchess1.jpg',
-            'asset/img/portfolio/wallchess/wallchess2.jpg',
-            'asset/img/portfolio/wallchess/wallchess3.jpg'
+            'asset/img/portfolio/mobile/mobile1.jpg',
+            'asset/img/portfolio/mobile/mobile2.jpg',
+            'asset/img/portfolio/mobile/mobile3.jpg'
         ],
-        tags: ['JavaScript', 'HTML5 Canvas', 'Разработка игр'],
+        tags: ['React Native', 'Firebase'],
         links: [
             {
-                title: 'GitHub',
-                url: 'https://github.com/Annjtt/wall-chess'
-            }
-        ]
-    },
-    {
-        id: 6,
-        title: 'Desktop app',
-        shortDescription: 'Разработка приложений под Windows и macOS',
-        fullDescription: `
-            <h5>Re:frame - File Converter</h5>
-            <h6>Мощное приложение для конвертации и обработки изображений, разработанное с использованием Electron.</h6>
-            <ul>
-                <li> ⬦ Оно позволяет пользователям легко и быстро конвертировать изображения в различные форматы</li>
-                <li> ⬦ Удалять фон с изображений с помощью современных нейросетевых технологий</li>
-                <li> ⬦ Удобный интерфейс для загрузки, предпросмотра и скачивания файлов</li>
-                <li> ⬦ Поддержка пакетной обработки файлов</li>
-            </ul>
-        `,
-        thumbnail: 'asset/img/portfolio/re-frame/laptop-pro.avif',
-        images: [
-            'asset/img/portfolio/re-frame/re-frame-start.webp',
-            'asset/img/portfolio/re-frame/re-frame-main.webp',
-            'asset/img/portfolio/re-frame/re-frame-set-format.webp',
-            'asset/img/portfolio/re-frame/re-frame-set.webp'
-        ],
-        tags: ['Electron.js', 'HTML5+CSS', 'Desktop app', 'Python'],
-        links: [
+                title: 'Демо',
+                url: 'https://example.com/demo'
+            },
             {
                 title: 'GitHub',
-                url: 'https://github.com/SH-Studio-official/re-frame'
+                url: 'https://github.com/example/project'
             }
         ]
     }
