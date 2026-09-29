@@ -214,6 +214,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Конфигурация API
+// ВАЖНО: на GitHub Pages (https) адрес http://localhost:8000 работать не будет —
+// форма не отправится. Перед публикацией укажите тут реальный HTTPS-адрес API,
+// иначе форма продолжит слать запрос на локальную машину.
 const API_CONFIG = {
     BASE_URL: 'http://localhost:8000',  // Базовый URL API бота
     ENDPOINTS: {
