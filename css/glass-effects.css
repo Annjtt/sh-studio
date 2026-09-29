@@ -1,14 +1,16 @@
 /* Стили для эффекта стекла */
 
-/* Базовые стили для элементов с эффектом стекла */
+/* Базовые стили для элементов с эффектом стекла.
+   Фон плотнее и размытие сильнее, чтобы неоновая 3D сцена за текстом
+   не мешала читаемости */
 .glass-effect {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 19px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 /* Общие стили для элементов с эффектом при наведении */
@@ -32,9 +34,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: transparent;
     z-index: -1;
-    transition: background 0.3s ease;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.1) 100%);
+    transition: background 0.4s ease;
     border-radius: inherit;
 }
 
@@ -42,7 +44,7 @@
 .glass-effect:hover::before,
 .service-card:hover::before,
 .social-link:hover::before {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.096) 100%);
 }
 
 /* Специальный градиент для кнопок */
@@ -88,7 +90,9 @@
     align-items: center;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .service-card:hover {
@@ -103,7 +107,9 @@
     padding: 10px 20px;
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: all 0.3s ease;
 }
 
@@ -116,7 +122,7 @@
 .btn {
     display: inline-block;
     padding: 12px 24px;
-    background: #000000;
+    background: #00000061;
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 30px;

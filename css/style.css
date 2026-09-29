@@ -3,7 +3,7 @@
 @import url('glass-effects.css');
 
 :root {
-    --dark-bg: #0a0a0a;
+    --dark-bg: #05070c;
     --text-color: #ffffff;
     --accent-color: #ffffff;
     --glass-bg: rgba(255, 255, 255, 0.1);
@@ -114,37 +114,6 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 10px;
-}
-
-.portfolio-card {
-    overflow: hidden;
-    transition: var(--transition);
-    user-select: none;
-    cursor: pointer;
-}
-
-.portfolio-card:hover {
-    transform: translateY(-10px);
-}
-
-.portfolio-image {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
-    user-select: none;
-}
-
-.portfolio-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    user-select: none;
-}
-
-.portfolio-content {
-    padding: 20px;
-    user-select: none;
 }
 
 .portfolio-tags {
@@ -262,30 +231,36 @@ nav ul li a:hover::after {
     display: flex;
     align-items: center;
     padding-top: 80px;
-    background-color: var(--dark-bg);
     position: relative;
     overflow: hidden;
+    /* Фон полностью прозрачный — 3D сцена должна быть видна */
+    background: transparent;
 }
 
-/* Общий фон с геометрическими фигурами */
-.bg-shapes {
+/* 3D фон сайта (Three.js, js/space-bg.js) */
+.space-bg {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-    overflow: hidden;
+    display: block;
+    z-index: -2;
     pointer-events: none;
+    /* Запасной фон, если WebGL недоступен или модуль не загрузился */
+    background:
+        radial-gradient(48% 42% at 26% 22%, rgba(190, 214, 255, 0.10), transparent 70%),
+        radial-gradient(42% 38% at 76% 72%, rgba(160, 190, 255, 0.07), transparent 70%),
+        #05070c;
 }
 
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+/* Затемнение по краям: держит текст читаемым поверх неона */
+.space-bg-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(120% 95% at 50% 38%, rgba(5, 7, 12, 0) 0%, rgba(5, 7, 12, 0.55) 68%, rgba(5, 7, 12, 0.88) 100%);
 }
 
 .hero-content {
@@ -315,46 +290,6 @@ nav ul li a:hover::after {
     margin-bottom: 2rem;
 }
 
-/* Стили для геометрических фигур */
-.geometric-shape {
-    position: absolute;
-    border: 1.2px solid rgba(255, 255, 255, 0.5);
-    opacity: 0.7;
-    pointer-events: none;
-}
-
-/* Стили для SVG треугольников */
-.svg-triangle {
-    pointer-events: none;
-    opacity: 0.9;
-    z-index: 10;
-    box-shadow: none !important;
-    background: none !important;
-    border: none !important;
-}
-
-.svg-triangle polygon {
-    fill: transparent !important;
-}
-
-/* Адаптивность для геометрических фигур */
-@media (max-width: 768px) {
-    .geometric-shape {
-        border-width: 1px;
-    }
-    
-    .svg-triangle polygon {
-        stroke-width: 1px !important;
-    }
-}
-
-@media (max-width: 576px) {
-    .geometric-shape {
-        /* Уменьшаем количество и размер фигур на маленьких экранах */
-        transform-origin: center;
-        transform: scale(0.7);
-    }
-}
 
 /* О нас */
 .about {
@@ -828,8 +763,7 @@ footer {
 
 /* Создаем темный фон для контента во всех секциях */
 .services, .contact, .about {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background: transparent;
 }
 
 /* Исправление для текста внутри элементов */
@@ -987,8 +921,7 @@ footer {
 
 /* Создаем темный фон для контента во всех секциях */
 .services, .contact, .about {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    background: transparent;
 }
 
 .service-card svg,

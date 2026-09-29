@@ -6,10 +6,21 @@
     <title>SH Studio - Студия разработки и дизайна</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/glass-effects.css">
+
+    <!-- Three.js вендорен локально: js/vendor/three -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./js/vendor/three/build/three.module.min.js",
+                "three/addons/": "./js/vendor/three/jsm/"
+            }
+        }
+    </script>
 </head>
 <body>
-    <!-- Фон с геометрическими фигурами для всего сайта -->
-    <div class="bg-shapes" id="site-bg"></div>
+    <!-- 3D фон: куб, острый конус и круг в тёмном пространстве с неоновыми гранями -->
+    <canvas id="space-bg" class="space-bg" aria-hidden="true"></canvas>
+    <div class="space-bg-scrim" aria-hidden="true"></div>
     
     <header>
         <div class="container">
@@ -40,7 +51,6 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-bg" id="geometric-bg"></div>
         <div class="container">
             <div class="hero-content glass-effect fade-up">
                 <h1>SH Studio</h1>
@@ -216,5 +226,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script type="module" src="js/space-bg.js"></script>
 </body>
 </html>

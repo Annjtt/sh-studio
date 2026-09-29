@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/glass-effects.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/portfolio-style.css">
 </head>
 <body>
     <!-- Фон с геометрическими фигурами для всего сайта -->
@@ -42,8 +43,14 @@
     <section id="portfolio" class="portfolio">
         <div class="container">
             <h2 class="fade-up">Наши работы</h2>
-            <div id="portfolio-grid" class="portfolio-grid">
-                <!-- Карточки портфолио будут добавляться динамически через JavaScript -->
+            <div id="portfolio-carousel" class="portfolio-carousel">
+                <div id="portfolio-carousel-inner" class="portfolio-carousel-inner">
+                    <!-- Карточки портфолио будут добавляться динамически через JavaScript -->
+                </div>
+            </div>
+            <div class="portfolio-nav">
+                <button id="portfolio-prev" class="portfolio-nav-btn" disabled>‹</button>
+                <button id="portfolio-next" class="portfolio-nav-btn">›</button>
             </div>
 
             <!-- Модальное окно для просмотра проектов -->

@@ -228,25 +228,38 @@ const portfolioProjects = [
     }
 ];
 
+// Функция для получения категорий проекта
+function getProjectCategories(project) {
+    const categoryMap = {
+        'Game': ['#GAME'],
+        'Веб-сайт': ['#WEBSITE'],
+        'Desktop app': ['#DESKTOP', '#APP'],
+        'Фирменный стиль': ['#BRANDING', '#DESIGN'],
+        'Telegram Бот': ['#BOT', '#TELEGRAM'],
+        'Мобильное приложение': ['#MOBILE', '#APP']
+    };
+
+    return categoryMap[project.title] || ['#PROJECT'];
+}
+
 // Функция для создания карточки проекта
-function createProjectCard(project) {
+function createProjectCard(project, index) {
+    const categories = getProjectCategories(project);
+    const projectNumber = (index + 1).toString().padStart(2, '0');
+
     const card = document.createElement('div');
-    card.className = 'portfolio-card glass-effect fade-up';
+    card.className = 'portfolio-card fade-up';
     card.innerHTML = `
-        <div class="portfolio-image">
-            ${project.thumbnail ? 
-                `<img src="${project.thumbnail}" alt="${project.title}">` :
-                `<svg width="100%" height="200" viewBox="0 0 400 200">
-                    <rect width="100%" height="100%" fill="rgba(255, 255, 255, 0.1)"/>
-                    <text x="50%" y="50%" fill="white" text-anchor="middle" dominant-baseline="middle">${project.title}</text>
-                </svg>`
-            }
+        ${project.thumbnail ? `<div class="portfolio-image"><img src="${project.thumbnail}" alt="${project.title}"></div>` : ''}
+        <div class="portfolio-categories">
+            ${categories.map(cat => `<span class="portfolio-category">${cat}</span>`).join('')}
         </div>
+        <div class="portfolio-number">№${projectNumber}</div>
         <div class="portfolio-content">
-            <h3>${project.title}</h3>
-            <p style="color: var(--text-color); opacity: 0.8;">${project.shortDescription}</p>
+            <h3 class="portfolio-title">${project.title}</h3>
+            <p class="portfolio-description">${project.shortDescription}</p>
             <div class="portfolio-tags">
-                ${project.tags.map(tag => `<span class="tag glass-effect" style="background: var(--glass-bg); border: 1px solid var(--glass-border);">${tag}</span>`).join('')}
+                ${project.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
             </div>
         </div>
     `;
@@ -262,16 +275,16 @@ function openProjectModal(project) {
 
     // Заполняем контент модального окна
     modalContent.innerHTML = `
-        <span class="portfolio-modal-close">&times;</span>
+        <button class="portfolio-modal-close">&times;</button>
         <div class="portfolio-modal-body">
             <div class="portfolio-modal-info">
-                <h2 class="portfolio-modal-title">${project.title}</h2>
+                <h2>${project.title}</h2>
                 <div class="portfolio-modal-description">${project.fullDescription}</div>
                 <div class="portfolio-tags">
-                    ${project.tags.map(tag => `<span class="tag glass-effect">${tag}</span>`).join('')}
+                    ${project.tags.map(tag => `<span class="portfolio-tag">${tag}</span>`).join('')}
                 </div>
                 <div class="portfolio-modal-links">
-                    ${project.links.map(link => 
+                    ${project.links.map(link =>
                         `<a href="${link.url}" class="portfolio-modal-link" target="_blank">${link.title}</a>`
                     ).join('')}
                 </div>
@@ -299,7 +312,9 @@ function openProjectModal(project) {
 
     // Обработчик закрытия
     const closeBtn = modal.querySelector('.portfolio-modal-close');
-    closeBtn.addEventListener('click', () => closeProjectModal());
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => closeProjectModal());
+    }
 
     // Закрытие по клику вне контента
     modal.addEventListener('click', (e) => {
@@ -403,18 +418,337 @@ function closeImageLightbox() {
 
 // Инициализация портфолио
 function initPortfolio() {
-    const portfolioGrid = document.getElementById('portfolio-grid');
-    if (!portfolioGrid) return;
+    const portfolioCarouselInner = document.getElementById('portfolio-carousel-inner');
+    if (!portfolioCarouselInner) return;
 
-    // Очищаем grid перед добавлением проектов
-    portfolioGrid.innerHTML = '';
+    // Очищаем carousel перед добавлением проектов
+    portfolioCarouselInner.innerHTML = '';
 
-    // Добавляем карточки проектов
+    const totalProjects = portfolioProjects.length;
+
+    // Определяем количество буферных карточек в зависимости от размера экрана
+    const isMobile = window.innerWidth <= 480;
+    const bufferCards = isMobile ? 2 : 3; // Меньше буферных карточек на мобильных
+
+    // Создаем копию карточек для плавной бесконечной прокрутки
+    // Карусель будет состоять из: оригинал + копия в начале + копия в конце
+
+    // Добавляем копию в начало (последние bufferCards карточки)
+    for (let i = totalProjects - bufferCards; i < totalProjects; i++) {
+        const project = portfolioProjects[i];
+        const card = createProjectCard(project, i);
+        portfolioCarouselInner.appendChild(card);
+    }
+
+    // Добавляем оригинальные карточки
     portfolioProjects.forEach((project, index) => {
-        const card = createProjectCard(project);
+        const card = createProjectCard(project, index);
         card.classList.add(`delay-${index + 1}`);
-        portfolioGrid.appendChild(card);
+        portfolioCarouselInner.appendChild(card);
     });
+
+    // Добавляем копию в конец (первые bufferCards карточки)
+    for (let i = 0; i < bufferCards; i++) {
+        const project = portfolioProjects[i];
+        const card = createProjectCard(project, i);
+        portfolioCarouselInner.appendChild(card);
+    }
+
+    // Инициализируем плавную бесконечную карусель
+    initSmoothInfiniteCarousel(bufferCards);
+}
+
+// Функция для плавной бесконечной карусели
+function initSmoothInfiniteCarousel(bufferCardsCount = 3) {
+    const carousel = document.getElementById('portfolio-carousel');
+    const carouselInner = document.getElementById('portfolio-carousel-inner');
+    const prevBtn = document.getElementById('portfolio-prev');
+    const nextBtn = document.getElementById('portfolio-next');
+
+    if (!carousel || !carouselInner) return;
+
+    const cards = Array.from(carouselInner.children);
+    const totalOriginal = portfolioProjects.length; // 6 оригинальных карточек
+
+    // Динамический расчет ширины карточки
+    const firstCard = cards[bufferCardsCount]; // Берем первую оригинальную карточку
+    const isMobile = window.innerWidth <= 480;
+
+    // Ждем полной загрузки DOM и стилей
+    setTimeout(() => {
+        const calculatedCardWidth = firstCard ? firstCard.offsetWidth : 400;
+        cardWidth = isMobile ? calculatedCardWidth : (calculatedCardWidth + 32); // На десктопе добавляем gap
+        console.log('Card width calculated:', cardWidth, 'isMobile:', isMobile);
+    }, 100);
+
+    let cardWidth = isMobile
+        ? window.innerWidth // Начальное значение для мобильных
+        : (firstCard ? firstCard.offsetWidth + 32 : 432); // На десктопе - с gap
+    const bufferCards = bufferCardsCount;
+
+    let currentPosition = -bufferCards * cardWidth; // начинаем с оригинальных карточек
+    let isTransitioning = false;
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let dragStartTime = 0;
+    let autoScrollInterval;
+
+    // Устанавливаем начальную позицию
+    carouselInner.style.transform = `translateX(${currentPosition}px)`;
+
+    function moveToPosition(position, smooth = true) {
+        if (isTransitioning && smooth) return;
+
+        console.log('Moving to position:', position, 'smooth:', smooth, 'cardWidth:', cardWidth);
+        currentPosition = position;
+        carouselInner.style.transition = smooth ? 'transform 0.5s ease' : 'none';
+        carouselInner.style.transform = `translateX(${currentPosition}px)`;
+
+        if (smooth) {
+            isTransitioning = true;
+            setTimeout(() => {
+                isTransitioning = false;
+
+                // Проверяем, нужно ли перепрыгнуть для бесконечного эффекта
+                const originalStart = -bufferCards * cardWidth;
+                const originalEnd = -(bufferCards + totalOriginal - 1) * cardWidth;
+
+                // Вычисляем текущий индекс карточки
+                const currentCardIndex = Math.round(-currentPosition / cardWidth);
+                console.log('Current card index:', currentCardIndex, 'bufferCards:', bufferCards, 'totalOriginal:', totalOriginal);
+
+                if (currentCardIndex < bufferCards) {
+                    // Мы в начале буферных карточек - перепрыгиваем к концу оригинальных
+                    const targetIndex = bufferCards + totalOriginal - (bufferCards - currentCardIndex);
+                    currentPosition = -targetIndex * cardWidth;
+                    console.log('Jumping to end, targetIndex:', targetIndex, 'new position:', currentPosition);
+                    carouselInner.style.transition = 'none';
+                    carouselInner.style.transform = `translateX(${currentPosition}px)`;
+                } else if (currentCardIndex >= bufferCards + totalOriginal) {
+                    // Мы в конце буферных карточек - перепрыгиваем к началу оригинальных
+                    const offset = currentCardIndex - (bufferCards + totalOriginal);
+                    const targetIndex = bufferCards + offset;
+                    currentPosition = -targetIndex * cardWidth;
+                    console.log('Jumping to start, targetIndex:', targetIndex, 'new position:', currentPosition);
+                    carouselInner.style.transition = 'none';
+                    carouselInner.style.transform = `translateX(${currentPosition}px)`;
+                }
+            }, 500);
+        }
+    }
+
+    function moveNext() {
+        console.log('Move next called, current position:', currentPosition);
+        const isMobile = window.innerWidth <= 480;
+        if (isMobile) {
+            // На мобильных - страничное перелистывание
+            moveToPosition(currentPosition - cardWidth, true);
+        } else {
+            // На десктопе - плавное движение
+            moveToPosition(currentPosition - cardWidth, true);
+        }
+    }
+
+    function movePrev() {
+        console.log('Move prev called, current position:', currentPosition);
+        const isMobile = window.innerWidth <= 480;
+        if (isMobile) {
+            // На мобильных - страничное перелистывание
+            moveToPosition(currentPosition + cardWidth, true);
+        } else {
+            // На десктопе - плавное движение
+            moveToPosition(currentPosition + cardWidth, true);
+        }
+    }
+
+    // Функции для drag/touch взаимодействия
+    function getClientX(event) {
+        return event.type.includes('mouse') ? event.clientX : event.touches[0].clientX;
+    }
+
+    function startDrag(event) {
+        if (isTransitioning) return;
+
+        console.log('Start drag event:', event.type);
+        isDragging = true;
+        startX = getClientX(event);
+        currentX = startX;
+        dragStartTime = Date.now();
+
+        // Останавливаем автопрокрутку
+        stopAutoScroll();
+
+        // Отключаем transition для плавного следования за курсором
+        carouselInner.style.transition = 'none';
+
+        // Добавляем класс для стилей
+        carousel.classList.add('dragging');
+
+        event.preventDefault();
+    }
+
+    function drag(event) {
+        if (!isDragging) return;
+
+        currentX = getClientX(event);
+        const deltaX = currentX - startX;
+        const newPosition = currentPosition + deltaX;
+
+        carouselInner.style.transform = `translateX(${newPosition}px)`;
+
+        event.preventDefault();
+    }
+
+    function endDrag(event) {
+        if (!isDragging) return;
+
+        isDragging = false;
+        const deltaX = currentX - startX;
+        const deltaTime = Date.now() - dragStartTime;
+        const velocity = deltaX / deltaTime; // пиксели в миллисекунду (с направлением)
+
+        // Убираем класс dragging
+        carousel.classList.remove('dragging');
+
+        // Вычисляем финальную позицию
+        let finalPosition = currentPosition;
+
+        // Адаптация логики для разных экранов
+        const isMobile = window.innerWidth <= 480;
+
+        if (isMobile) {
+            // На мобильных: страничное перелистывание
+            const minSwipeDistance = 50; // Минимальное расстояние для свайпа
+            const minSwipeVelocity = 0.3; // Минимальная скорость
+
+            if (Math.abs(deltaX) > minSwipeDistance || Math.abs(velocity) > minSwipeVelocity) {
+                // Определяем направление
+                const direction = deltaX > 0 ? 1 : -1;
+                finalPosition = currentPosition + (direction * cardWidth);
+            } else {
+                // Недостаточно для свайпа - возвращаемся на текущую позицию
+                finalPosition = currentPosition;
+            }
+        } else {
+            // На десктопе: старая логика с инерцией
+            const minDragDistance = 30;
+            const minVelocity = 0.3;
+
+            if (Math.abs(deltaX) > minDragDistance || Math.abs(velocity) > minVelocity) {
+                const direction = deltaX > 0 ? 1 : -1;
+                const speed = Math.abs(velocity);
+
+                let cardsToMove = Math.max(1, Math.round(Math.abs(deltaX) / (cardWidth * 0.3)));
+
+                if (speed > 0.8) cardsToMove += 1;
+                if (speed > 1.5) cardsToMove += 1;
+
+                const moveDistance = direction * cardsToMove * cardWidth;
+                finalPosition = currentPosition + moveDistance;
+            } else {
+                const cardIndex = Math.round(-finalPosition / cardWidth);
+                finalPosition = -cardIndex * cardWidth;
+            }
+        }
+
+        currentPosition = finalPosition;
+
+        // Возвращаем transition
+        carouselInner.style.transition = 'transform 0.3s ease';
+
+        // Финализируем позицию
+        moveToPosition(currentPosition, true);
+
+        // Возобновляем автопрокрутку через некоторое время
+        setTimeout(() => {
+            if (!isDragging) startAutoScroll();
+        }, 1000);
+
+        event.preventDefault();
+    }
+
+    // Навигационные кнопки
+    if (prevBtn) {
+        prevBtn.addEventListener('click', movePrev);
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', moveNext);
+    }
+
+    // Обработчики drag/touch событий
+    carousel.addEventListener('mousedown', startDrag);
+    carousel.addEventListener('mousemove', drag);
+    carousel.addEventListener('mouseup', endDrag);
+    carousel.addEventListener('mouseleave', endDrag);
+
+    // Touch события для мобильных устройств
+    carousel.addEventListener('touchstart', startDrag, { passive: false });
+    carousel.addEventListener('touchmove', drag, { passive: false });
+    carousel.addEventListener('touchend', endDrag, { passive: false });
+
+    // Предотвращаем выделение текста при drag
+    carousel.addEventListener('selectstart', (e) => {
+        if (isDragging) e.preventDefault();
+    });
+
+    // Функции автопрокрутки
+    function startAutoScroll() {
+        if (autoScrollInterval) return; // Уже запущена
+
+        autoScrollInterval = setInterval(() => {
+            if (!isTransitioning && !isDragging) {
+                moveNext();
+            }
+        }, 4000); // каждые 4 секунды
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+            autoScrollInterval = null;
+        }
+    }
+
+    // Останавливаем автопрокрутку при взаимодействии
+    carousel.addEventListener('mouseenter', stopAutoScroll);
+    carousel.addEventListener('mouseleave', () => {
+        if (!isDragging) startAutoScroll();
+    });
+
+    // Обработка изменения размера окна
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            // Пересчитываем ширину карточек при изменении размера окна
+            const wasMobile = window.innerWidth <= 480;
+            const nowMobile = window.innerWidth <= 480;
+
+            if (wasMobile !== nowMobile) {
+                // Если изменился тип устройства (мобильный/десктоп), переинициализируем
+                initPortfolio();
+            } else {
+                // Для мобильных - пересчитываем ширину карточек при повороте
+                const currentFirstCard = carouselInner.children[bufferCards];
+                const newCardWidth = nowMobile
+                    ? window.innerWidth
+                    : (currentFirstCard ? currentFirstCard.offsetWidth + 32 : 432);
+
+                if (Math.abs(newCardWidth - cardWidth) > 10) {
+                    initPortfolio(); // Переинициализация для корректного пересчета
+                }
+            }
+        }, 250);
+    });
+
+    // Запускаем автопрокрутку
+    startAutoScroll();
+
+    // Останавливаем автопрокрутку при клике на кнопки и начале drag
+    if (prevBtn) prevBtn.addEventListener('click', stopAutoScroll);
+    if (nextBtn) nextBtn.addEventListener('click', stopAutoScroll);
 }
 
 // Запускаем инициализацию после загрузки DOM

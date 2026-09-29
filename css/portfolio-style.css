@@ -1,0 +1,739 @@
+/* Стили для страницы портфолио в стиле Fiftyseven.co */
+
+:root {
+    --portfolio-bg: #0000001a;
+    --portfolio-text: #ffffff;
+    --portfolio-accent: #ffffff;
+    --grey-accent: #b4b4b4;
+    --portfolio-glass: rgba(255, 255, 255, 0.03);
+    --portfolio-border: rgba(255, 255, 255, 0.09);
+    --portfolio-hover: rgba(255, 255, 255, 0.08);
+    --portfolio-transition: all 0.4s ease;
+    --portfolio-font-family: 'Montserrat', sans-serif;
+}
+
+/* Основной контейнер портфолио */
+.portfolio {
+    background: var(--portfolio-bg);
+    backdrop-filter: blur(2px);
+    min-height: 100vh;
+    color: var(--portfolio-text);
+    font-family: var(--portfolio-font-family);
+}
+
+/* Заголовок секции */
+.portfolio h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    color: var(--portfolio-text);
+    opacity: 0.9;
+}
+
+/* Карусель портфолио */
+.portfolio-carousel {
+    display: flex;
+    gap: 2rem;
+    overflow: hidden;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 2rem auto 2rem;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+}
+
+.portfolio-carousel:active {
+    cursor: grabbing;
+}
+
+.portfolio-carousel.dragging {
+    cursor: grabbing;
+}
+
+/* Для мобильных устройств */
+.portfolio-carousel {
+    touch-action: pan-y; /* Разрешаем вертикальную прокрутку, но не горизонтальную */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.portfolio-carousel-inner {
+    display: flex;
+    gap: 2rem;
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+/* Карточка проекта */
+.portfolio-card {
+    background: var(--portfolio-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 22px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: var(--portfolio-transition);
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 390px;
+    scroll-snap-align: start;
+}
+
+.portfolio-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.1) 100%);
+    opacity: 0;
+    transition: var(--portfolio-transition);
+    z-index: -1;
+    border-radius: 0;
+}
+
+/* Изображение проекта */
+.portfolio-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: var(--portfolio-transition);
+    z-index: -2;
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4) blur(1px);
+}
+
+.portfolio-card:hover .portfolio-image {
+    opacity: 1;
+}
+
+.portfolio-card:hover::before {
+    opacity: 1;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.123);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Категории проекта */
+.portfolio-categories {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.portfolio-category {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--grey-accent);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Номер проекта */
+.portfolio-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--portfolio-text);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    z-index: 2;
+}
+
+/* Контент карточки */
+.portfolio-content {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: 2rem;
+}
+
+.portfolio-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--portfolio-text);
+    line-height: 1.2;
+}
+
+.portfolio-description {
+    font-size: 0.875rem;
+    color: var(--portfolio-text);
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Теги технологий */
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.portfolio-tag {
+    font-size: 0.75rem;
+    color: var(--portfolio-text);
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--portfolio-transition);
+}
+
+.portfolio-tag:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+/* Навигация карусели */
+.portfolio-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.portfolio-nav-btn {
+    background: var(--portfolio-glass);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: var(--portfolio-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--portfolio-text);
+    font-size: 1.2rem;
+}
+
+.portfolio-nav-btn:hover {
+    background: var(--portfolio-hover);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.portfolio-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Номер проекта */
+.portfolio-number {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--portfolio-text);
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+}
+
+/* Контент карточки */
+.portfolio-content {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: 2rem;
+}
+
+.portfolio-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--portfolio-text);
+    line-height: 1.2;
+}
+
+.portfolio-description {
+    font-size: 0.875rem;
+    color: var(--portfolio-text);
+    opacity: 0.8;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Теги технологий */
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.portfolio-tag {
+    font-size: 0.75rem;
+    color: var(--portfolio-text);
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--portfolio-transition);
+}
+
+.portfolio-tag:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .portfolio-carousel {
+        gap: 1.5rem;
+        padding: 1rem;
+        margin: 1rem auto 1rem;
+    }
+
+    .portfolio h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .portfolio-card {
+        padding: 1.5rem;
+        min-height: 250px;
+        width: 320px;
+    }
+
+    .portfolio-title {
+        font-size: 1.25rem;
+    }
+
+    .portfolio-description {
+        font-size: 0.8rem;
+    }
+
+    .portfolio-nav {
+        margin-top: 1rem;
+    }
+
+    .portfolio-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Карусель для очень маленьких экранов - ПОЛНОЭКРАННЫЕ КАРТОЧКИ */
+    .portfolio-carousel {
+        gap: 2rem; /* Убираем расстояние между карточками */
+        padding: 2rem; /* Без отступов */
+        margin: 0.5rem auto 1rem; /* Минимальные отступы */
+        overflow: hidden; /* Скрываем прокрутку */
+        scroll-snap-type: x mandatory; /* Включаем snap для мобильных */
+    }
+
+    .portfolio-carousel-inner {
+        gap: 1rem; /* Без расстояния между карточками */
+    }
+
+    .portfolio h2 {
+        font-size: 1.25rem; /* Компактный заголовок */
+        margin-bottom: 0.5rem; /* Небольшой отступ */
+        text-align: center;
+        padding: 0 1rem; /* Добавляем отступы только для текста */
+    }
+
+    .portfolio-card {
+        padding: 1rem; /* Комфортные внутренние отступы */ /* ПОЛНАЯ ШИРИНА ЭКРАНА */ /* Высота почти на весь экран минус заголовок и навигация */
+        flex-shrink: 0;
+        border-radius: 16px; /* Убираем скругления для полноэкранного вида */
+        margin: 0; /* Без внешних отступов */
+        scroll-snap-align: center; /* Центрирование для мобильных */
+    }
+
+    .portfolio-image {
+        opacity: 0.8; /* Более заметные фоновые изображения на мобильных */
+        filter: brightness(0.3) blur(2px); /* Темнее и более размытые для лучшего чтения */
+    }
+
+    .portfolio-categories {
+        top: 1rem;
+        left: 1rem;
+        gap: 0.5rem; /* Нормальное расстояние между категориями */
+        z-index: 3;
+    }
+
+    .portfolio-category {
+        font-size: 0.7rem; /* Читаемый размер */
+        padding: 0.25rem 0.6rem; /* Комфортные отступы */
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .portfolio-number {
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.8rem; /* Читаемый номер */
+        z-index: 3;
+    }
+
+    .portfolio-content {
+        margin-top: auto; /* Контент прижимается к низу карточки */
+        padding-top: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .portfolio-title {
+        font-size: 1.25rem; /* Крупный заголовок для мобильных */
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+        font-weight: 600;
+    }
+
+    .portfolio-description {
+        font-size: 0.9rem; /* Читаемый размер текста */
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+    }
+
+    .portfolio-tags {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .portfolio-tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+    }
+
+    .portfolio-nav {
+        gap: 1rem;
+        margin-top: 1rem;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 10;
+    }
+
+    .portfolio-nav-btn {
+        width: 44px; /* Крупнее для удобного нажатия пальцем */
+        height: 44px;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+
+    .portfolio-nav-btn:hover {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.05);
+    }
+
+
+    /* Адаптация модального окна для маленьких экранов */
+
+    .portfolio-modal-info h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+    }
+
+    .portfolio-modal-description {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .portfolio-modal-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Оптимальный размер для мобильных */
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .portfolio-modal-gallery img {
+        height: 140px; /* Комфортный размер изображений */
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .portfolio-modal-gallery img:hover {
+        transform: scale(1.02);
+    }
+
+    .portfolio-modal-links {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .portfolio-modal-link {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        min-width: 120px;
+        text-align: center;
+    }
+}
+
+/* Анимации появления */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+.portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+.portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+.portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+.portfolio-card:nth-child(5) { animation-delay: 0.5s; }
+.portfolio-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Delay классы для анимаций */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+.delay-6 { animation-delay: 0.6s; }
+.delay-7 { animation-delay: 0.7s; }
+.delay-8 { animation-delay: 0.8s; }
+
+/* Модальное окно в новом стиле */
+.portfolio-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2000;
+    overflow-y: auto;
+}
+
+.portfolio-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-modal-content {
+    background: var(--portfolio-bg);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 16px;
+    max-width: 1200px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    margin: 2rem;
+}
+
+.portfolio-modal-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    color: var(--portfolio-text);
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--portfolio-transition);
+    z-index: 2001;
+}
+
+.portfolio-modal-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.portfolio-modal-body {
+    padding: 4rem 3rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.portfolio-modal-info h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--portfolio-text);
+}
+
+.portfolio-modal-description {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.portfolio-modal-description h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--portfolio-text);
+}
+
+.portfolio-modal-description h6 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.portfolio-modal-description p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.portfolio-modal-description ul {
+    margin-bottom: 2rem;
+}
+
+.portfolio-modal-description li {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.portfolio-modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.portfolio-modal-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--portfolio-transition);
+}
+
+.portfolio-modal-gallery img:hover {
+    transform: scale(1.02);
+}
+
+.portfolio-modal-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.portfolio-modal-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--portfolio-glass);
+    border: 1px solid var(--portfolio-border);
+    color: var(--portfolio-text);
+    text-decoration: none;
+    transition: var(--portfolio-transition);
+    font-weight: 500;
+}
+
+.portfolio-modal-link:hover {
+    background: var(--portfolio-hover);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Адаптивность модального окна */
+@media (max-width: 1024px) {
+    .portfolio-modal-body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 2rem 2rem;
+    }
+
+    .portfolio-modal-info h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .portfolio-modal-body {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .portfolio-modal-info h2 {
+        font-size: 1.75rem;
+    }
+
+    .portfolio-modal-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .portfolio-modal-gallery img {
+        height: 150px;
+    }
+}
+
+
+/* Delay классы для анимаций */
+.delay-1 { animation-delay: 0.10s; }
+.delay-2 { animation-delay: 0.20s; }
+.delay-3 { animation-delay: 0.30s; }
+.delay-4 { animation-delay: 0.40s; }
+.delay-5 { animation-delay: 0.50s; }
+.delay-6 { animation-delay: 0.60s; }
+.delay-7 { animation-delay: 0.70s; }
+.delay-8 { animation-delay: 0.80s; }
