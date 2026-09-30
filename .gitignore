@@ -52,3 +52,6 @@ coverage/
 *.backup
 *.old
 *.txt
+
+# GitHub Pages build folder
+_site/
