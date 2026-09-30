@@ -54,16 +54,17 @@ const CONFIG = {
 
     // Рандом появления: каждый элемент выходит в случайный момент и в случайной
     // точке, поэтому картинка никогда не повторяется
-    spawnDelay: 6,          // до скольких секунд растягивается первое появление
+    spawnDepth: 7,          // насколько глубоко сдвигается элемент при старте
     spawnX: 4,              // диапазон появления по X
     spawnY: 2.6,            // диапазон появления по Y
-    speedMin: 0.5,          // разброс скорости полёта между элементами
+    speedMin: 0.7,          // разброс скорости полёта между элементами
     speedMax: 1.35,
     respawnSkipChance: 0.4, // вероятность, что элемент «отсидит» лишний цикл
     respawnSkip: 6,         // насколько глубоко уходит при скрипе
 
-    fadeNear: [1.0, 4.5],
-    fadeFar: [12, 19.5]
+    // Насколько широко видна сцена по глубине
+    fadeNear: [1.0, 4.5],   // [где начинает исчезать у камеры, где полностью видна]
+    fadeFar: [16, 20]       // [где начинает угасать в глубине, где полностью скрыта]
 };
 
 // Раскладка объектов. tone: 0 — ближний (яркий белый), 1 — далёкий (тусклый холодный).
@@ -134,6 +135,8 @@ if (canvas && isWebGLAvailable()) {
     } catch (error) {
         console.warn('[space-bg] 3D фон не запущен, используется CSS-фон:', error);
     }
+} else {
+    console.warn('[space-bg] WebGL недоступен, используется CSS-фон');
 }
 
 function startSpaceBackground() {
@@ -294,7 +297,9 @@ function startSpaceBackground() {
         const line = createLineMaterial(neonColor, 1);
         const group = builders[item.type]({ face, line, neonColor });
 
-        group.position.set(item.pos[0] * spreadX, item.pos[1] * spreadY, item.pos[2]);
+        // Разброс по глубине при старте: элементы выходят из глубины не одновременно
+        const startZ = item.pos[2] - randomBetween(0, CONFIG.spawnDepth);
+        group.position.set(item.pos[0] * spreadX, item.pos[1] * spreadY, startZ);
         group.rotation.set(item.rot[0], item.rot[1], item.rot[2]);
         group.scale.setScalar(item.scale);
 
@@ -310,12 +315,9 @@ function startSpaceBackground() {
             bob: item.bob,
             phase: Math.random() * Math.PI * 2,
             bobSpeed: randomBetween(0.25, 0.55),
-            // Случайности: своя скорость полёта, свой темп вращения и
-            // случайная задержка до первого появления
+            // Случайности: своя скорость полёта и свой темп вращения
             speed: randomBetween(CONFIG.speedMin, CONFIG.speedMax),
             spinScale: randomBetween(0.6, 1.45),
-            spawnDelay: randomBetween(0.2, CONFIG.spawnDelay),
-            age: 0,
             face,
             line,
             lineBaseOpacity: 1 - item.tone * 0.4,
@@ -454,11 +456,10 @@ function startSpaceBackground() {
                 data.spinScale = randomBetween(0.6, 1.45);
             }
 
-            // Плавное появление вблизи и растворение вдали + случайная
-            // задержка в начале, чтобы элементы выходили не одновременно
-            data.age += delta;
-            const appear = THREE.MathUtils.smoothstep(data.age, data.spawnDelay * 0.55, data.spawnDelay);
-            const fade = depthFade(object.position.z) * appear;
+            // Плавное появление вблизи и растворение вдали.
+            // Считается только по глубине, поэтому первый кадр и режим
+            // prefers-reduced-motion показывают ту же картинку
+            const fade = depthFade(object.position.z);
             data.face.opacity = 0.92 * fade;
             data.line.opacity = data.lineBaseOpacity * fade;
             data.glow.material.opacity = data.glowBaseOpacity * fade;
@@ -531,6 +532,9 @@ function startSpaceBackground() {
     lineMaterials.forEach((material) => material.resolution.set(initialBuffer.x, initialBuffer.y));
     updateScene(0);
     render();
+
+    // Проверка в консоли: если 3D не видно, это будет здесь
+    console.info(`[space-bg] 3D-фон запущен: объектов ${objects.length}, WebGL: ${renderer.getContext().getParameter(renderer.getContext().VERSION)}`);
 
     if (!reducedMotion) {
         frameRequest = requestAnimationFrame(frame);

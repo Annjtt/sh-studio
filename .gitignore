@@ -35,6 +35,11 @@ yarn-error.log*
 dist/
 build/
 
+# НО: папка build внутри вендоренного Three.js нужна сайту,
+# иначе на GitHub Pages будет 404 и 3D-фон не запустится
+!js/vendor/three/build/
+!js/vendor/three/build/**
+
 # Локальные конфигурации
 config.local.js
 settings.local.json

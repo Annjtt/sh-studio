@@ -45,6 +45,30 @@ jobs:
           echo "--- _site content ---"
           ls -a _site
 
+      # Fail the deploy instead of publishing a broken site: a missing file in the
+      # repository (e.g. js/vendor/three/build/ hidden by a .gitignore rule) is
+      # invisible here and only shows up as a 404 on the live site
+      - name: Verify required files
+        run: |
+          set -e
+          missing=0
+          for f in .nojekyll index.html portfolio.html admin.html \
+                   css/style.css css/glass-effects.css \
+                   js/main.js js/space-bg.js \
+                   js/vendor/three/build/three.module.min.js \
+                   js/vendor/three/jsm/lines/LineMaterial.js; do
+            if [ -e "$f" ]; then
+              echo "ok   $f"
+            else
+              echo "MISS $f"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "::error::Required files are missing from the repository. Check .gitignore."
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
