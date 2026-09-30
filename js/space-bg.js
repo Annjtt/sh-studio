@@ -43,7 +43,9 @@ const CONFIG = {
     // ==========================================================================
 
     // Движение объектов навстречу камере (имитация полёта сквозь пространство)
-    travelSpan: 20,
+    // travelSpan заведомо больше fadeFar[1] (25), поэтому объект в момент
+    // возврата гарантированно полностью прозрачен
+    travelSpan: 27,
     baseTravel: 0.75,
     scrollBoost: 0.03,
     maxBoost: 14,
@@ -59,12 +61,19 @@ const CONFIG = {
     spawnY: 2.6,            // диапазон появления по Y
     speedMin: 0.7,          // разброс скорости полёта между элементами
     speedMax: 1.35,
-    respawnSkipChance: 0.4, // вероятность, что элемент «отсидит» лишний цикл
-    respawnSkip: 6,         // насколько глубоко уходит при скрипе
+    respawnSkipChance: 0.35, // вероятность, что элемент «отсидит» лишний цикл
+    respawnSkip: 5,         // насколько глубоко уходит при скрипе
 
-    // Насколько широко видна сцена по глубине
-    fadeNear: [1.0, 4.5],   // [где начинает исчезать у камеры, где полностью видна]
-    fadeFar: [16, 20]       // [где начинает угасать в глубине, где полностью скрыта]
+    // Насколько широко видна сцена по глубине. Диапазоны длинные — так объекты
+    // не появляются и не исчезают рывком, а проявляются и растворяются плавно
+    fadeNear: [0.3, 4.0],   // [где начинает исчезать у камеры, где полностью видна]
+    fadeFar: [18, 25],      // [где начинает угасать в глубине, где полностью скрыта]
+    // Случайный сдвиг этих границ у каждого объекта, в обе стороны
+    fadeJitterNear: 0.8,
+    fadeJitterFar: 1.5,
+    // Точка возврата объекта вглубь. Держим её около нуля, где fade = 0,
+    // чтобы смена позиции не была видна глазом
+    recycleZ: 0.2
 };
 
 // Раскладка объектов. tone: 0 — ближний (яркий белый), 1 — далёкий (тусклый холодный).
@@ -327,6 +336,7 @@ function startSpaceBackground() {
         });
 
         objects.push(group);
+        randomizeFade(group.userData);
         scene.add(group);
     });
 
@@ -402,12 +412,25 @@ function startSpaceBackground() {
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('visibilitychange', onVisibilityChange);
 
+    // У каждого объекта свои границы появления и растворения: они не
+    // проявляются на одной и той же глубине, поэтому картинка живая
+    function randomizeFade(data) {
+        data.fadeNear = [
+            CONFIG.fadeNear[0],
+            CONFIG.fadeNear[1] + randomBetween(-CONFIG.fadeJitterNear, CONFIG.fadeJitterNear)
+        ];
+        data.fadeFar = [
+            CONFIG.fadeFar[0] + randomBetween(-CONFIG.fadeJitterFar, CONFIG.fadeJitterFar),
+            CONFIG.fadeFar[1]
+        ];
+    }
+
     // Плавное появление и растворение объектов по мере удаления
-    function depthFade(z) {
+    function depthFade(z, data) {
         const distance = -z;
         if (distance <= 0) return 0;
-        const appear = THREE.MathUtils.smoothstep(distance, CONFIG.fadeNear[0], CONFIG.fadeNear[1]);
-        const vanish = 1 - THREE.MathUtils.smoothstep(distance, CONFIG.fadeFar[0], CONFIG.fadeFar[1]);
+        const appear = THREE.MathUtils.smoothstep(distance, data.fadeNear[0], data.fadeNear[1]);
+        const vanish = 1 - THREE.MathUtils.smoothstep(distance, data.fadeFar[0], data.fadeFar[1]);
         return appear * vanish;
     }
 
@@ -443,8 +466,9 @@ function startSpaceBackground() {
             object.position.y = (data.baseY + Math.sin(elapsed * data.bobSpeed + data.phase) * data.bob) * spreadY;
             object.position.x = (data.baseX + Math.cos(elapsed * data.bobSpeed * 0.7 + data.phase) * data.bob * 0.6) * spreadX;
 
-            // Элемент пролетел мимо камеры — уводим его вглубь пространства
-            if (object.position.z > 3.5) {
+            // Элемент подошёл к камере и стал полностью прозрачным — только
+            // теперь меняем позицию, иначе перенос был бы виден как рывок
+            if (object.position.z > CONFIG.recycleZ) {
                 // Иногда элемент «отсиживает» лишний цикл в глубине, чтобы
                 // появления не были синхронными
                 const skip = Math.random() < CONFIG.respawnSkipChance ? randomBetween(0, CONFIG.respawnSkip) : 0;
@@ -454,12 +478,13 @@ function startSpaceBackground() {
                 data.bob = randomBetween(0.12, 0.34);
                 data.bobSpeed = randomBetween(0.2, 0.6);
                 data.spinScale = randomBetween(0.6, 1.45);
+                randomizeFade(data);
             }
 
             // Плавное появление вблизи и растворение вдали.
             // Считается только по глубине, поэтому первый кадр и режим
             // prefers-reduced-motion показывают ту же картинку
-            const fade = depthFade(object.position.z);
+            const fade = depthFade(object.position.z, data);
             data.face.opacity = 0.92 * fade;
             data.line.opacity = data.lineBaseOpacity * fade;
             data.glow.material.opacity = data.glowBaseOpacity * fade;
